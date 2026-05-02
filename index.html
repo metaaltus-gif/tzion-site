@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tzion AI Group — Agentes de AI, Apps, Plataformas Personalizadas e Configuração de AI para o seu negócio." />
+  <meta name="robots" content="index, follow" />
+  <title>Tzion AI Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --surface: #0e1422;
+      --card: #121929;
+      --border: rgba(99,179,237,0.12);
+      --accent: #4f8ef7;
+      --accent2: #a855f7;
+      --accent3: #06d6a0;
+      --text: #e2e8f0;
+      --muted: #8896b3;
+      --white: #ffffff;
+      --grad: linear-gradient(135deg, #4f8ef7, #a855f7);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(8,12,20,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { background: var(--grad); color: #fff; border: none; padding: 0.55rem 1.4rem; border-radius: 50px; font-size: 0.88rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.3s, transform 0.2s; }
+    .nav-cta:hover { opacity: 0.85; transform: scale(1.04); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+      padding: 7rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.3);
+      color: var(--accent); border-radius: 50px; padding: 0.35rem 1rem; font-size: 0.8rem; font-weight: 600;
+      margin-bottom: 1.5rem; animation: fadeUp 0.8s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem); font-weight: 900; line-height: 1.1;
+      letter-spacing: -2px; max-width: 900px;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+    .hero h1 .grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p {
+      margin-top: 1.5rem; font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted);
+      max-width: 620px; animation: fadeUp 1s ease 0.2s both;
+    }
+    .hero-btns { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 1.1s ease 0.3s both; }
+    .btn-primary { background: var(--grad); color: #fff; padding: 0.85rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.3s; box-shadow: 0 0 30px rgba(79,142,247,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(79,142,247,0.5); }
+    .btn-secondary { border: 1px solid var(--border); color: var(--text); padding: 0.85rem 2rem; border-radius: 50px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: background 0.3s, border-color 0.3s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); }
+
+    /* STATS */
+    .stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem; max-width: 900px; width: 100%; margin: 4rem auto 0;
+      animation: fadeUp 1.2s ease 0.4s both;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2.2rem; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* SECTION */
+    section { padding: 6rem 1.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag { display: inline-block; color: var(--accent); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1px; line-height: 1.2; }
+    .section-sub { color: var(--muted); margin-top: 0.8rem; font-size: 1rem; max-width: 550px; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .card::before { content: ''; position: absolute; inset: 0; background: var(--grad); opacity: 0; transition: opacity 0.3s; }
+    .card:hover { transform: translateY(-6px); border-color: rgba(79,142,247,0.4); box-shadow: 0 20px 60px rgba(79,142,247,0.12); }
+    .card-icon { font-size: 2.2rem; margin-bottom: 1.2rem; position: relative; z-index: 1; }
+    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.7rem; position: relative; z-index: 1; }
+    .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; position: relative; z-index: 1; }
+    .card-tag { display: inline-block; margin-top: 1.2rem; font-size: 0.72rem; font-weight: 600; color: var(--accent); background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2); padding: 0.25rem 0.75rem; border-radius: 50px; position: relative; z-index: 1; }
+
+    /* SKILLS */
+    .skills-bg { background: var(--surface); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .skill-card:hover { transform: translateY(-4px); border-color: rgba(168,85,247,0.4); }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .skill-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .skill-tag { font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 50px; background: rgba(168,85,247,0.1); color: var(--accent2); border: 1px solid rgba(168,85,247,0.2); }
+    .skill-tag.green { background: rgba(6,214,160,0.1); color: var(--accent3); border-color: rgba(6,214,160,0.2); }
+    .skill-tag.blue { background: rgba(79,142,247,0.1); color: var(--accent); border-color: rgba(79,142,247,0.2); }
+
+    /* HOW IT WORKS */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3.5rem; }
+    .step { text-align: center; padding: 1.5rem; }
+    .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0 auto 1rem; }
+    .step h4 { font-weight: 700; margin-bottom: 0.5rem; }
+    .step p { color: var(--muted); font-size: 0.88rem; }
+
+    /* ABOUT */
+    .about-bg { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+    .about-text h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 900; letter-spacing: -1px; line-height: 1.2; margin-bottom: 1.2rem; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
+    .about-features { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .about-features li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; }
+    .about-features li::before { content: '✦'; color: var(--accent); font-size: 0.7rem; margin-top: 0.25rem; flex-shrink: 0; }
+    .about-visual {
+      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      padding: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .pill { background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.15); border-radius: 12px; padding: 1rem 1.2rem; font-size: 0.88rem; color: var(--text); display: flex; align-items: center; gap: 0.7rem; }
+    .pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent3); flex-shrink: 0; animation: pulse 2s infinite; }
+
+    /* CONTACT */
+    .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 3.5rem; max-width: 700px; margin: 3.5rem auto 0; text-align: center; }
+    .contact-card h3 { font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem; }
+    .contact-card p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
+    .contact-form input, .contact-form textarea, .contact-form select {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text);
+      border-radius: 12px; padding: 0.85rem 1.1rem; font-size: 0.9rem; font-family: inherit;
+      transition: border-color 0.3s; outline: none; width: 100%;
+    }
+    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--accent); }
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+    .contact-form select option { background: var(--surface); }
+    .submit-btn { background: var(--grad); color: #fff; border: none; padding: 1rem; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: opacity 0.3s, transform 0.2s; }
+    .submit-btn:hover { opacity: 0.85; transform: scale(1.02); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 3rem 1.5rem; text-align: center; }
+    .footer-logo { font-size: 1.3rem; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; list-style: none; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a { color: var(--muted); font-size: 0.85rem; text-decoration: none; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { color: var(--muted); font-size: 0.8rem; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .revealed { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero h1 { letter-spacing: -1px; }
+      .contact-card { padding: 2rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">TZION AI</div>
+  <ul class="nav-links">
+    <li><a href="#services">Serviços</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#contact">Contato</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Fale Conosco</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <span class="hero-badge">⚡ AI-Powered Solutions</span>
+  <h1>Transformamos <span class="grad">Inteligência Artificial</span> em Resultados Reais</h1>
+  <p>Desenvolvemos apps, plataformas personalizadas, agentes de AI e configuramos soluções de inteligência artificial para acelerar o crescimento do seu negócio.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">Começar Agora</a>
+    <a href="#services" class="btn-secondary">Ver Serviços</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Tecnologias de AI</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Personalizado</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Suporte e Monitoramento</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Escalabilidade</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-tag reveal">O que fazemos</span>
+    <h2 class="section-title reveal">Soluções disruptivas <br/>para a era da AI</h2>
+    <p class="section-sub reveal">Da ideia ao produto final — construímos tecnologia que coloca o seu negócio à frente da concorrência.</p>
+    <div class="services-grid">
+      <div class="card reveal">
+        <div class="card-icon">🤖</div>
+        <h3>Agentes de AI</h3>
+        <p>Desenvolvemos agentes autônomos que automatizam processos, tomam decisões e interagem com clientes de forma inteligente e natural.</p>
+        <span class="card-tag">AI Agents · LLM · Automação</span>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">📱</div>
+        <h3>Desenvolvimento de Apps</h3>
+        <p>Apps nativos e multiplataforma (iOS & Android) com AI integrada — interfaces intuitivas e experiências que encantam usuários.</p>
+        <span class="card-tag">iOS · Android · React Native</span>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🏗️</div>
+        <h3>Plataformas Personalizadas</h3>
+        <p>Construímos plataformas SaaS e sistemas web sob medida para as necessidades do seu negócio, escaláveis e seguras.</p>
+        <span class="card-tag">SaaS · Web App · API</span>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">⚙️</div>
+        <h3>Configuração de Plataformas AI</h3>
+        <p>Configuramos e integramos plataformas de AI líderes de mercado (OpenAI, Anthropic, Google AI, etc.) ao seu ecossistema.</p>
+        <span class="card-tag">OpenAI · Claude · Gemini</span>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🔗</div>
+        <h3>Integrações & APIs</h3>
+        <p>Conectamos sua infraestrutura existente a soluções de AI via APIs robustas, eliminando silos de dados e otimizando fluxos.</p>
+        <span class="card-tag">REST · GraphQL · Webhooks</span>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">📊</div>
+        <h3>Consultoria em AI</h3>
+        <p>Estratégia e road-map de AI para o seu negócio: identificamos oportunidades, definimos arquitetura e guiamos a implementação.</p>
+        <span class="card-tag">Strategy · Road-map · ROI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <div class="section-inner">
+    <span class="section-tag reveal">Competências</span>
+    <h2 class="section-title reveal">Skills que nos <br/>tornam únicos</h2>
+    <p class="section-sub reveal">Um stack completo de tecnologias de ponta para entregar soluções de AI de alto impacto.</p>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🧠</div>
+        <h4>Inteligência Artificial & ML</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Modelagem, fine-tuning e deploy de modelos de AI</p>
+        <div class="skill-tags">
+          <span class="skill-tag">GPT-4o</span>
+          <span class="skill-tag">Claude</span>
+          <span class="skill-tag">Gemini</span>
+          <span class="skill-tag blue">RAG</span>
+          <span class="skill-tag blue">Fine-tuning</span>
+          <span class="skill-tag green">LangChain</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <h4>AI Agents & Automação</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Agentes autônomos com memória, ferramentas e raciocínio</p>
+        <div class="skill-tags">
+          <span class="skill-tag">AutoGPT</span>
+          <span class="skill-tag blue">CrewAI</span>
+          <span class="skill-tag blue">LangGraph</span>
+          <span class="skill-tag green">n8n</span>
+          <span class="skill-tag green">Make</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📱</div>
+        <h4>Mobile Development</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Apps nativos e cross-platform para iOS e Android</p>
+        <div class="skill-tags">
+          <span class="skill-tag blue">Swift</span>
+          <span class="skill-tag blue">SwiftUI</span>
+          <span class="skill-tag">React Native</span>
+          <span class="skill-tag green">Flutter</span>
+          <span class="skill-tag">Expo</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <h4>Web & Backend</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Plataformas web escaláveis e APIs robustas</p>
+        <div class="skill-tags">
+          <span class="skill-tag blue">Next.js</span>
+          <span class="skill-tag blue">React</span>
+          <span class="skill-tag green">Node.js</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">FastAPI</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <h4>Cloud & Infraestrutura</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Deploy, escalabilidade e segurança em cloud</p>
+        <div class="skill-tags">
+          <span class="skill-tag blue">AWS</span>
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag green">Azure</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag blue">Kubernetes</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <h4>Bancos de Dados & Vetores</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Armazenamento inteligente para dados e embeddings</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag blue">Supabase</span>
+          <span class="skill-tag green">Pinecone</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Weaviate</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🎨</div>
+        <h4>UI/UX & Design</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Interfaces centradas no usuário com design system</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag blue">Framer</span>
+          <span class="skill-tag green">Tailwind</span>
+          <span class="skill-tag">Design System</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔒</div>
+        <h4>Segurança & Compliance</h4>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;">Privacidade, segurança e conformidade regulatória</p>
+        <div class="skill-tags">
+          <span class="skill-tag blue">OAuth 2.0</span>
+          <span class="skill-tag">JWT</span>
+          <span class="skill-tag green">LGPD</span>
+          <span class="skill-tag">GDPR</span>
+          <span class="skill-tag">SOC 2</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <span class="section-tag reveal">Processo</span>
+    <h2 class="section-title reveal">Como trabalhamos</h2>
+    <p class="section-sub reveal">Um método ágil e transparente, do conceito ao produto em produção.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h4>Descoberta</h4>
+        <p>Entendemos seu negócio, desafios e objetivos para desenhar a solução ideal.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h4>Estratégia AI</h4>
+        <p>Definimos arquitetura, tecnologias e road-map de implementação de AI.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h4>Desenvolvimento</h4>
+        <p>Sprints ágeis com entregas contínuas, total transparência e feedback loop.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h4>Deploy & Escala</h4>
+        <p>Publicação, monitoramento em tempo real e otimização contínua da solução.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-bg">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="section-tag">Sobre a Tzion AI</span>
+        <h2>Construindo o futuro com Inteligência Artificial</h2>
+        <p>A Tzion AI Group nasceu para democratizar o acesso a soluções de inteligência artificial de alto impacto. Unimos expertise técnica profunda com visão estratégica de negócios.</p>
+        <p>Acreditamos que a AI não é apenas uma ferramenta — é uma vantagem competitiva transformadora. Por isso, desenvolvemos soluções sob medida que geram resultado real e mensurável.</p>
+        <ul class="about-features">
+          <li>Soluções 100% personalizadas para o seu contexto</li>
+          <li>Tecnologia de ponta com modelos LLM líderes de mercado</li>
+          <li>Foco em ROI real e métricas de negócio</li>
+          <li>Suporte dedicado e evolução contínua</li>
+          <li>Conformidade com Apple App Store & Google Play</li>
+        </ul>
+      </div>
+      <div class="about-visual reveal">
+        <div class="pill"><span class="pill-dot"></span> AI Agent online e processando dados...</div>
+        <div class="pill"><span class="pill-dot" style="background:var(--accent)"></span> Plataforma SaaS escalando em cloud</div>
+        <div class="pill"><span class="pill-dot" style="background:var(--accent2)"></span> App iOS submetido para revisão</div>
+        <div class="pill"><span class="pill-dot" style="background:var(--accent3)"></span> Pipeline de AI em produção</div>
+        <div class="pill"><span class="pill-dot" style="background:var(--accent)"></span> Integração OpenAI configurada</div>
+        <div class="pill"><span class="pill-dot"></span> Modelos fine-tuned para domínio do cliente</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-tag reveal" style="display:block;text-align:center">Contato</span>
+    <h2 class="section-title reveal" style="text-align:center">Vamos construir algo<br/>extraordinário juntos</h2>
+    <div class="contact-card reveal">
+      <h3>Fale com a Tzion AI</h3>
+      <p>Descreva seu projeto e entraremos em contato em até 24 horas.</p>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <input type="text" placeholder="Seu nome completo" required />
+        <input type="email" placeholder="Seu e-mail profissional" required />
+        <input type="text" placeholder="Empresa (opcional)" />
+        <select>
+          <option value="" disabled selected>Qual serviço você precisa?</option>
+          <option>Agente de AI</option>
+          <option>Desenvolvimento de App (iOS/Android)</option>
+          <option>Plataforma Personalizada (SaaS/Web)</option>
+          <option>Configuração de Plataforma AI</option>
+          <option>Consultoria em AI</option>
+          <option>Outro</option>
+        </select>
+        <textarea placeholder="Descreva sua ideia ou desafio..."></textarea>
+        <button type="submit" class="submit-btn">Enviar Mensagem →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TZION AI GROUP</div>
+  <ul class="footer-links">
+    <li><a href="#services">Serviços</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#contact">Contato</a></li>
+    <li><a href="#">Política de Privacidade</a></li>
+    <li><a href="#">Termos de Uso</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Tzion AI Group. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Form submit handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.submit-btn');
+    btn.textContent = '✓ Mensagem enviada!';
+    btn.style.background = 'linear-gradient(135deg, #06d6a0, #059669)';
+    setTimeout(() => {
+      btn.textContent = 'Enviar Mensagem →';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
