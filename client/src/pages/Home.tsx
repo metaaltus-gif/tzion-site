@@ -54,6 +54,19 @@ export default function Home() {
   const [filter, setFilter] = useState("All systems");
   const [selected, setSelected] = useState<Project | null>(null);
 
+  // O formulario abre o cliente de e-mail do visitante. Trocar por endpoint
+  // real (Formspree, Resend, rota /api) quando o dominio fenixrise.ai estiver ativo.
+  const handleContact = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement)?.value ?? "";
+    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value ?? "";
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value ?? "";
+    const subject = encodeURIComponent(`FenixRise — ${name || "new signal"}`);
+    const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
+    window.location.href = `mailto:hello@fenixrise.ai?subject=${subject}&body=${body}`;
+  };
+
   const filtered = filter === "All systems" ? projects : projects.filter((project) => project.type === filter);
 
   useEffect(() => {
@@ -133,7 +146,7 @@ export default function Home() {
 
         <section id="about" className="section signal-section" aria-labelledby="about-title"><div className="section-wrap about-grid"><div className="about-copy"><span className="index">04 / the studio</span><h2 id="about-title" className="display">A studio, not a vendor.</h2><p>FenixRise was born to put serious AI within reach of real businesses: systems that verify before they speak, protect what they touch and keep working after the demo ends. We run on AWS, GCP and Azure, comply with LGPD, and support what we ship.</p></div><div className="about-note">We do not build demos that look intelligent. We build systems that make the operation more intelligent.</div></div></section>
 
-        <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="section-wrap contact-grid"><div className="contact-copy"><span className="index">05 / next signal</span><h2 id="contact-title" className="display">Tell us what should exist.</h2><p>What is slow, repetitive or impossible to see? Bring us the operation. We will help map the system.</p></div><form className="contact-form" onSubmit={(event) => event.preventDefault()}><label>Name<input id="name" type="text" placeholder="Your name" /></label><label>Email<input id="email" type="email" placeholder="you@company.com" /></label><label>What are we building?<textarea id="message" placeholder="Tell us what should exist..." /></label><button className="btn-primary" type="submit">Send the signal <ArrowRight size={16} /></button></form></div><footer className="footer"><span>© 2026 FenixRise · Rise. Build. Protect.</span><span>hello@fenixrise.ai · São Paulo / Global</span></footer></section>
+        <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="section-wrap contact-grid"><div className="contact-copy"><span className="index">05 / next signal</span><h2 id="contact-title" className="display">Tell us what should exist.</h2><p>What is slow, repetitive or impossible to see? Bring us the operation. We will help map the system.</p></div><form className="contact-form" onSubmit={handleContact}><label>Name<input id="name" name="name" type="text" placeholder="Your name" required /></label><label>Email<input id="email" name="email" type="email" placeholder="you@company.com" required /></label><label>What are we building?<textarea id="message" name="message" placeholder="Tell us what should exist..." required /></label><button className="btn-primary" type="submit">Send the signal <ArrowRight size={16} /></button></form></div><footer className="footer"><span>© 2026 FenixRise · Rise. Build. Protect.</span><span>hello@fenixrise.ai · São Paulo / Global</span></footer></section>
       </main>
 
       {selected && <div className="drawer-backdrop" role="presentation" onClick={() => setSelected(null)}><aside className="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" onClick={(event) => event.stopPropagation()}><button className="drawer-close" aria-label="Close case" onClick={() => setSelected(null)}><X /></button><span className="case-meta mono">{selected.category} · system signal</span><h3 id="drawer-title">{selected.name}</h3><p>{selected.description} Every case is built around a real workflow, verified against real constraints and supported after launch.</p><img className="drawer-image" src={selected.name === "FORGE" ? forgeAsset : emberAsset} alt="System interface visualization" /><div className="drawer-stats"><div className="drawer-stat"><b>Live</b><span>status</span></div><div className="drawer-stat"><b>Human</b><span>approval gate</span></div><div className="drawer-stat"><b>Built</b><span>around operations</span></div></div></aside></div>}
