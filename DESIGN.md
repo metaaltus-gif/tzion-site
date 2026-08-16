@@ -3,7 +3,7 @@
 Substitui o mundo anterior (dark genérico com gradientes). Anti-referência: o look antigo e o "dark de IA" (near-black chapado + neon + glow por todo lado).
 
 ## Mundo
-"Estúdio Apple à meia-luz, aquecido por uma brasa": carvão FÍSICO (com grão de filme e vinheta suave, nunca chapado), tipografia de sistema em pesos leves e escala grande, muito ar, hairlines discretas — e UMA presença viva: a fênix-cometa que desce a lateral da página com o scroll, deixando rastro de brasas.
+"Estúdio Apple à meia-luz, aquecido por uma brasa": carvão FÍSICO (com grão de filme e vinheta suave, nunca chapado), tipografia de sistema em pesos leves e escala grande, muito ar, hairlines discretas — e a marca fênix (arte Partículas aprovada) pousada estática no topo-direito.
 
 ## Tokens
 - `--bg: #131013` (carvão quente) + overlay de grão SVG (feTurbulence, ~4% opacidade, fixed) + vinheta radial sutil
@@ -22,7 +22,7 @@ Substitui o mundo anterior (dark genérico com gradientes). Anti-referência: o 
 - Contato: e-mail grande + form mínimo (mailto)
 
 ## Motion (autorada, uma orquestração)
-- **Fênix-cometa (canvas fixo)**: parte no topo-direito, desce a borda direita conforme scrollProgress com flutuação senoidal; corpo = núcleo brilhante + plumas bezier; emite partículas-brasa que caem e apagam (rastro). `prefers-reduced-motion` → estática, sem rastro. DPR cap 2, rAF pausado fora de viewport.
+- **Fênix (16/08/2026, decisão do dono)**: a marca Partículas aprovada (`fenix.png`) fica **ESTÁTICA** no topo-direito (`#fenixmark`, img absoluta, `clamp(140px,16vw,300px)`). O rastro de brasas e o movimento de scroll foram rejeitados ("parece feito por criança") e removidos. Motion na fênix só volta quando um efeito for aprovado explicitamente pelo dono.
 - Reveals: IntersectionObserver, translateY 14px + opacity, ease-out expo, 1x por seção.
 
 ## Regras
