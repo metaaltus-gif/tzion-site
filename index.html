@@ -42,7 +42,7 @@ Brasa Viva + fênix viva), sem tournament.
     content:''; position:fixed; inset:0; z-index:1; pointer-events:none;
     background:radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(0,0,0,.36) 100%);
   }
-  #phoenix{position:fixed; inset:0; z-index:2; pointer-events:none}
+  #phoenix{position:fixed; top:0; left:0; width:100%; height:100%; z-index:2; pointer-events:none}
   .shell{position:relative; z-index:3}
 
   html[data-lang="en"] .pt{display:none}
@@ -316,7 +316,12 @@ Brasa Viva + fênix viva), sem tournament.
   var cv = document.getElementById('phoenix'), cx = cv.getContext('2d');
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
-  function size(){ W = innerWidth; H = innerHeight; cv.width = W*DPR; cv.height = H*DPR; cx.setTransform(DPR,0,0,DPR,0,0); }
+  function size(){
+    W = innerWidth; H = innerHeight;
+    cv.width = W*DPR; cv.height = H*DPR;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';  /* canvas é replaced: sem CSS explícito ele fica no tamanho do atributo e transborda em DPR > 1 */
+    cx.setTransform(DPR,0,0,DPR,0,0);
+  }
   size(); addEventListener('resize', size);
 
   var parts = [], MAXP = 220, t = 0, scrollT = 0, lastY = scrollY, speed = 0;
